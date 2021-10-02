@@ -1,0 +1,118 @@
+<form [formGroup]="addressForm">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>FORMULARIO</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="col">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Nombre" formControlName="nombre">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Apellido" formControlName="apellido">
+            <mat-error *ngIf="addressForm.controls['apellido'].hasError('required')">
+              First name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="DNI" formControlName="dni">
+            <mat-error *ngIf="addressForm.controls['dni'].hasError('required')">
+              Last name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Email" formControlName="email">
+            <mat-error *ngIf="addressForm.controls['email'].hasError('required')">
+              Address is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Nombre de usuario" formControlName="username">
+            <mat-error *ngIf="addressForm.controls['username'].hasError('required')">
+              Address is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Tipo" formControlName="tipoUsuario">
+            <mat-error *ngIf="addressForm.controls['tipoUsuario'].hasError('required')">
+              Address is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Clave" formControlName="clave">
+            <mat-error *ngIf="addressForm.controls['clave'].hasError('required')">
+              City is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div div="direcciones" formArrayName="direcciones" *ngFor="let dir of getDireccionesFormArray().controls; let i = index;">
+            <div [formGroupName]="i">
+                <mat-form-field>
+                    <mat-label>Direccion</mat-label>
+                    <input matInput formControlName="calle">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Localidad</mat-label>
+                    <input matInput formControlName="localidad">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Provincia</mat-label>
+                    <input matInput formControlName="provincia">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>CP</mat-label>
+                    <input matInput formControlName="cp">
+                </mat-form-field>
+                <p class="">
+                    <button mat-raised-button color="accent" (click)="delDireccion(i)">Eliminar</button>
+                </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p id="centrar">
+          <button mat-raised-button id="botonAnadirDireccion" color="primary" (click)="addDireccion()">Añadir direccion</button>
+      </p>
+      
+<!--       <div class="row">
+        <div class="col">
+          <mat-radio-group formControlName="shipping">
+            <mat-radio-button value="free">Free Shipping</mat-radio-button>
+            <mat-radio-button value="priority">Priority Shipping</mat-radio-button>
+            <mat-radio-button value="nextday">Next Day Shipping</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div> -->
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="onSubmit()">Enviar</button>
+      <button mat-raised-button color="accent" routerLink="/usuarios">Volver</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

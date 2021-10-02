@@ -1,0 +1,57 @@
+<!-- <mat-card class="frmLogin">
+    <mat-card-header>
+      <mat-card-title>
+          <h1>Formulario de login</h1>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form>
+            <button (click)="inicioSession()">Iniciar sesión</button>
+        </form>
+    </mat-card-content>
+</mat-card>
+<button (click)="inicioSession()">Iniciar sesión</button> -->
+
+<div id="fondo">
+    <img [src]="fotoFondo" style='width:100%;'>
+    <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
+      <mat-card class="login-card" [ngStyle]="{'background-image': 'url(' +  + ')'}">
+        <div>
+          <img id="fotoHiberusLogin" [src]="fotoHiberusLogin">
+        </div>
+        <h2>BIENVENIDX</h2>
+        <mat-card-header class="centrado">
+          <mat-card-title></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Usuario" formControlName="username"/>
+                <mat-error *ngIf="loginForm.controls['username'].hasError('required')">
+                    Usuario is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Contraseña" formControlName="clave" type="password"/>
+                <mat-error *ngIf="loginForm.controls['clave'].hasError('required')">
+                  Password is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+  
+        </mat-card-content>
+        <mat-card-actions class="centrado">
+          <button [disabled]= "loginForm.invalid" mat-raised-button color="primary" type="submit">Iniciar Sesión</button>
+          <!-- <button mat-raised-button color="warn" type="submit" (click)="registrarse()">Registrarse</button> -->
+        </mat-card-actions>
+      </mat-card>
+    </form>
+  </div>
+

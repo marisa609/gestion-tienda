@@ -1,0 +1,43 @@
+<!-- <div id="fondo">
+  <img [src]="fotoFondo" style='width:100%;height:100%'>
+  <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
+    <mat-card class="login-card" [ngStyle]="{'background-image': 'url(' +  + ')'}">
+      <div>
+        <img id="fotoHiberusLogin" [src]="fotoHiberusLogin">
+      </div>
+      <h2>BIENVENIDX</h2>
+      <mat-card-header class="centrado">
+        <mat-card-title></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Usuario" formControlName="email"/>
+              <mat-error *ngIf="loginForm.controls['email'].hasError('required')">
+                Email is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Password" formControlName="password" type="password"/>
+              <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+                Password is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+      </mat-card-content>
+      <mat-card-actions class="centrado">
+        <button [disabled]= "loginForm.invalid" mat-raised-button color="primary" type="submit">Iniciar Sesión</button>
+        <button mat-raised-button color="warn" type="submit" (click)="registrarse()">Registrarse</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>
+ -->

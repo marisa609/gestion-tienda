@@ -1,0 +1,43 @@
+.full-width {
+  width: 100%;
+}
+
+
+.shipping-card {
+  max-width: 60%;
+  margin: 20px auto;
+}
+
+mat-card-actions {
+  margin-left: 42%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  max-width: 80%;
+  margin-left: 10%;
+}
+
+.col {
+  flex: 1;
+  margin-right: 20px;
+  max-width: 80%;
+  margin-left: 10%;
+}
+
+.col:last-child {
+  margin-right: 0;
+}
+
+#centrar {
+  text-align: center;
+}
+
+#botonAnadirDireccion {
+  margin-top: 20px;
+  background-color: rgb(255, 255, 255);
+  color: black;
+}
+
+

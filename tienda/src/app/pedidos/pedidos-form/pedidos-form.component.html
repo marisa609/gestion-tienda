@@ -1,0 +1,170 @@
+<form [formGroup]="addressForm" novalidate>
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>FORMULARIO</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="col">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Número de pedido" formControlName="numeroPedido">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Fecha" formControlName="fecha">
+<!--             <mat-error *ngIf="addressForm.controls['fecha'].hasError('required')">
+              La fecha es <strong>requerida</strong>
+            </mat-error> -->
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Precio" formControlName="pecioTotal" [(ngModel)]="pecioTotal">
+          </mat-form-field>
+        </div>
+      </div>
+        <div class="row" id="completo">
+          <button mat-raised-button (click)="mostrarCliente=!mostrarCliente" id="botonDoble">CLIENTE</button>
+          <button mat-raised-button (click)="mostrarDireccionEntrega=!mostrarDireccionEntrega" id="botonDoble">DIRECCIÓN DE ENTREGA</button>
+        </div>
+        <!--CLIENTE-->
+        <div *ngIf="mostrarCliente || mostrarDireccionEntrega">
+          <mat-grid-list cols="2" rowHeight="2:1">
+            <mat-grid-tile> 
+              <div formGroupName="cliente" *ngIf="mostrarCliente" id="agrandar">
+                <!--selected de cliente-->
+                <div class="col">
+                  <mat-form-field>
+                    <mat-label>Usuario</mat-label>
+                    <mat-select (selectionChange)="seleccionUsuario($event.value)">
+                        <mat-option *ngFor="let item of usuarios" value="{{item | json}}">{{item.nombre}} {{item.apellido}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="Nombre" formControlName="nombre">
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="Apellido" formControlName="apellido">
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="DNI" formControlName="dni">
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="Email" formControlName="email">
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-grid-tile>
+
+            <!--DIRECCIONES DE ENTREGA-->
+            <mat-grid-tile>
+              <div formGroupName="direccionEntrega" *ngIf="mostrarDireccionEntrega" id="agrandar">
+                <div class="col">
+                  <mat-form-field *ngIf="usuarioSeleccionado">
+                    <mat-label>Direcciones</mat-label>
+                    <mat-select (selectionChange)="seleccionDireccion($event.value)">
+                        <mat-option *ngFor="let dir of usuarioSeleccionado.direcciones" value="{{ dir | json }}">{{dir.calle}}, {{dir.localidad}}, {{dir.provincia}} ({{dir.cp}})</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="Calle" formControlName="calle">
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="Localidad" formControlName="localidad">
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="Provincia" formControlName="provincia">
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="CP" formControlName="cp">
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </div> 
+
+      <!--DETALLES DEL PEDIDO-->
+      <button mat-raised-button (click)="mostrarDetalles=!mostrarDetalles" id="completo">DETALLES DEL PEDIDO</button>
+      <div *ngIf="mostrarDetalles" style="margin-top: 30px;"> <!-- *ngIf="mostrarDetalles" -->
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Producto</mat-label>
+            <mat-select (selectionChange)="seleccionProducto($event.value)" style="text-align: center;">
+                <mat-option *ngFor="let producto of productos" value="{{ producto | json }}">{{producto.referencia}}, {{producto.titulo}}, {{producto.descripcion}} ({{producto.precio}})</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <!-- <p id="centrar">
+          <button mat-raised-button id="botonAnadirDireccion" color="primary" (click)="addProducto()">Añadir pedido</button>
+        </p> -->
+        <div formArrayName="pedidoDetalle" *ngFor="let prod of getProductosFormArray().controls; let i = index;" >
+          <div [formGroupName]="i">
+            <div class="row" id="productos">
+              <div class="row">
+                <mat-form-field>
+                  <mat-label>Cantidad</mat-label>
+                  <input matInput formControlName="cantidad">
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <mat-form-field>
+                    <mat-label>Descuento</mat-label>
+                    <input matInput formControlName="descuento">
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <mat-form-field>
+                    <mat-label>Referencia del producto</mat-label>
+                    <input matInput formControlName="refProducto">
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <mat-form-field>
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="tituloProducto">
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <mat-form-field>
+                  <mat-label>Precio Unitario</mat-label>
+                  <input matInput formControlName="precioUnitario">
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <mat-form-field>
+                  <mat-label>Precio Total</mat-label>
+                  <input matInput formControlName="precioTotal">
+                </mat-form-field>
+              </div>
+              <p id="centrar">
+                <button id="papelera" (click)="delProducto(i)"><mat-icon>delete</mat-icon></button>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="onSubmit()">Enviar</button>
+      <button mat-raised-button color="accent" routerLink="/pedidos">Volver</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

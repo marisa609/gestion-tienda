@@ -1,0 +1,70 @@
+<div class="mat-elevation-z8">
+  <mat-card class="mat-card">
+    <mat-card-header>
+      <mat-card-title>
+        <h1>PEDIDOS</h1>
+        <button mat-raised-button color="primary" routerLink="/pedidos/new"><mat-icon>add</mat-icon> Añadir </button>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <table mat-table class="full-width-table" matSort aria-label="Elements">
+        <!-- Id Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+          <td mat-cell *matCellDef="let row">{{row._id}}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="numeroPedido">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+          <td mat-cell *matCellDef="let row">{{row.numeroPedido}}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="fecha">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
+          <td mat-cell *matCellDef="let row">{{row.fecha | date}}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="cliente">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Cliente</th>
+          <td mat-cell *matCellDef="let row">{{row.cliente.nombre}} {{row.cliente.apellido}}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="direccion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Dirección</th>
+          <td mat-cell *matCellDef="let row">{{row.direccionEntrega.calle}}, {{row.direccionEntrega.provincia}}</td>
+        </ng-container>
+        
+        <!-- Name Column -->
+        <ng-container matColumnDef="precioTotal">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio</th>
+          <td mat-cell *matCellDef="let row">{{row.pecioTotal}}€</td>
+        </ng-container>
+
+        <!-- Acciones Column -->
+        <ng-container matColumnDef="botones" class="prueba">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button color="primary" routerLink="/pedidos/edit/{{row._id}}"><mat-icon>edit</mat-icon></button>
+            <button mat-icon-button color="primary" (click)="eliminar(row._id)"><mat-icon>delete</mat-icon></button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator #paginator
+          [length]="dataSource?.data?.length"
+          [pageIndex]="0"
+          [pageSize]="10"
+          [pageSizeOptions]="[5, 10, 20]"
+          aria-label="Select page">
+      </mat-paginator>
+    </mat-card-content>
+  </mat-card>
+</div>

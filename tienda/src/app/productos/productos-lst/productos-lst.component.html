@@ -1,0 +1,70 @@
+<div class="mat-elevation-z8">
+  <mat-card class="mat-card">
+    <mat-card-header>
+      <mat-card-title>
+        <h1>PRODUCTOS</h1>
+        <button mat-raised-button color="primary" routerLink="/productos/new"><mat-icon>add</mat-icon> Añadir </button>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+    <table mat-table class="full-width-table" matSort aria-label="Elements">
+      <!-- Id Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+        <td mat-cell *matCellDef="let row">{{row._id}}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="referencia">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Referencia</th>
+        <td mat-cell *matCellDef="let row">{{row.referencia}}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="titulo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Título</th>
+        <td mat-cell *matCellDef="let row">{{row.titulo}}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="descripcion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripción</th>
+        <td mat-cell *matCellDef="let row">{{row.descripcion}}</td>
+      </ng-container>
+
+      <!-- Category Column -->
+      <ng-container matColumnDef="categoriaID">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Categoría</th>
+        <td mat-cell *matCellDef="let row">{{row.categoriaId.nombre}}</td>
+      </ng-container>
+
+      <!-- Price Column -->
+      <ng-container matColumnDef="precio">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio</th>
+        <td mat-cell *matCellDef="let row">{{row.precio}} €</td>
+      </ng-container>
+
+      <!-- Acciones Column -->
+      <ng-container matColumnDef="botones" class="prueba">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button color="primary" routerLink="/productos/edit/{{row._id}}"><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button color="primary" (click)="eliminar(row._id)"><mat-icon>delete</mat-icon></button>
+        </td>
+      </ng-container>
+      
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator #paginator
+        [length]="dataSource?.data?.length"
+        [pageIndex]="0"
+        [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 20]"
+        aria-label="Select page">
+    </mat-paginator>
+    </mat-card-content>
+  </mat-card>
+</div>

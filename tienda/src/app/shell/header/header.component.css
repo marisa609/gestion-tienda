@@ -1,0 +1,11 @@
+#fotoHiberusLogin {
+    max-width: 50px;
+    border-radius: 200px;
+    margin-left: 10px;
+}
+
+#botonSalir {
+    position: absolute;
+    margin-left: 95%;
+}
+

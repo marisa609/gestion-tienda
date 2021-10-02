@@ -1,0 +1,24 @@
+<form [formGroup]="addressForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>FORMULARIO</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="nombre de la categoría" formControlName="nombre">
+            <mat-error *ngIf="addressForm.controls['nombre'].hasError('required')">
+              Debe insertar una <strong>categoría</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Enviar</button>
+      <button mat-raised-button color="accent" routerLink="/categorias" >Volver</button>
+      <br><br>
+    </mat-card-actions>
+  </mat-card>
+</form>

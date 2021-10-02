@@ -1,0 +1,28 @@
+<div *ngIf="isAdministrador()">
+  <mat-toolbar color="primary">
+      <span>Hiberus</span>
+      <img id="fotoHiberusLogin" [src]="fotoHiberusLogin">
+      <span class="spacer"></span>
+      <a mat-button routerLink="/home">Home</a>
+      <a mat-button routerLink="/categorias">Categorias</a>
+      <a mat-button routerLink="/usuarios">Usuarios</a>
+      <a mat-button routerLink="/productos">Productos</a>
+      <a mat-button routerLink="/pedidos">Pedidos</a>
+      <a mat-button  (click)="cerrarSesion()">Salir</a>
+    </mat-toolbar>
+</div>
+
+<div *ngIf="!isAdministrador()">
+  <mat-toolbar color="primary">
+      <span>Hiberus</span>
+      <img id="fotoHiberusLogin" [src]="fotoHiberusLogin">
+      <span class="spacer"></span>
+      <a mat-button routerLink="/home">Home</a>
+      <a mat-button routerLink="/categorias">Categorias</a>
+      <a mat-button routerLink="/usuarios">Usuarios</a>
+      <a mat-button routerLink="/productos">Productos</a>
+      <!-- <a mat-button routerLink="/pedidos">Pedidos</a> -->
+      <a mat-button (click)="cerrarSesion()">Salir</a>
+    </mat-toolbar>
+</div>
+
